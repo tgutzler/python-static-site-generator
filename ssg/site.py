@@ -1,20 +1,18 @@
 from pathlib import Path
-from os import makedirs
-from os import path as pth
 
 
 class Site:
     def __init__(self, source, dest):
-        self._source = Path(source)
-        self._dest = Path(dest)
+        self.source = Path(source)
+        self.dest = Path(dest)
 
     def create_dir(self, path):
-        directory = pth.join(self._dest, path.relative_to(self._source))
-        makedirs(directory, exist_ok=True)
+        directory = self.dest / path.relative_to(self.source)
+        directory.mkdir(parents=True, exist_ok=True)
 
     def build(self):
-        makedirs(self._dest, exist_ok=True)
-        for path in self._source.rglob("*"):
+        self.dest.mkdir(parents=True, exist_ok=True)
+        for path in self.source.rglob("*"):
             if Path(path).is_dir():
                 self.create_dir(path)
 
