@@ -12,7 +12,8 @@ class Site:
 
     def build(self):
         self.dest.mkdir(parents=True, exist_ok=True)
+        # Better, eh?
+        # _ = [self.create_dir(path) for path in self.source.rglob("*") if path.is_dir()]
         for path in self.source.rglob("*"):
             if path.is_dir():
                 self.create_dir(path)
-
