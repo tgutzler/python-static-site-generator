@@ -13,6 +13,6 @@ class Site:
     def build(self):
         self.dest.mkdir(parents=True, exist_ok=True)
         for path in self.source.rglob("*"):
-            if Path(path).is_dir():
+            if path.is_dir():
                 self.create_dir(path)
 
